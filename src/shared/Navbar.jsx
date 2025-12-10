@@ -7,16 +7,10 @@ const Navbar = () => {
         <NavLink to="">Services</NavLink>
       </li>
       <li>
-        <NavLink to="">Services</NavLink>
+        <NavLink to="about-us">About Us</NavLink>
       </li>
       <li>
-        <NavLink to="">Services</NavLink>
-      </li>
-      <li>
-        <NavLink to="">Services</NavLink>
-      </li>
-      <li>
-        <NavLink to="">Services</NavLink>
+        <NavLink to="coverage">Coverage</NavLink>
       </li>
     </>
   );
@@ -40,7 +34,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn-primary">Log In</a>
+        <a className="btn">Log In</a>
       </div>
     </div>
   );
