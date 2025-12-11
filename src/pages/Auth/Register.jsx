@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 const Register = () => {
   const { show, setShow, registerUser } = useAuth();
@@ -21,21 +22,23 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 mt-4">
+      <h3 className="text-3xl text-center font-bold mb-4">Welcome to</h3>
+      <h4 className="text-2xl text-center font-semibold">Registration</h4>
       <form onSubmit={handleSubmit(handleRegistration)} className="card-body">
         <fieldset className="fieldset">
-          <label className="label">Email</label>
+          <label className="label ml-2">Email</label>
           <input
             type="email"
             {...register("email", { required: true })}
-            className="input"
+            className="input mx-auto"
             placeholder="Email"
           />
           {errors.email?.type === "required" && (
             <p className="text-red-500">Email is required.</p>
           )}
           {/* password field */}
-          <label className="label">Password</label>
+          <label className="label ml-2">Password</label>
           <input
             type={show ? "text" : "password"}
             {...register("password", {
@@ -44,12 +47,12 @@ const Register = () => {
               pattern:
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
             })}
-            className="input"
+            className="input mx-auto"
             placeholder="Password"
           />
           <span
             onClick={() => setShow(!show)}
-            className="absolute right-[50px] top-[135px] cursor-pointer z-50"
+            className="absolute right-[50px] top-[240px] cursor-pointer z-50"
           >
             {show ? <FaEye /> : <IoEyeOff />}
           </span>
@@ -68,10 +71,16 @@ const Register = () => {
             </p>
           )}
           <div>
-            <a className="link link-hover">Forgot password?</a>
+            <a className="link link-hover ml-2">Forgot password?</a>
           </div>
-          <button className="btn btn-neutral mt-4">Register</button>
+          <button className="btn btn-neutral mt-4 mx-2">Register</button>
         </fieldset>
+        <p className="text-md text-end mx-2">
+          Already have an account?{" "}
+          <Link to="/login">
+            <span className="text-blue-500 underline">Login</span>
+          </Link>
+        </p>
       </form>
     </div>
   );

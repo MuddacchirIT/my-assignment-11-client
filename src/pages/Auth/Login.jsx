@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 const Login = () => {
   const {
@@ -20,31 +21,33 @@ const Login = () => {
       });
   };
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-4 mt-4">
+      <h3 className="text-3xl text-center font-bold mb-4">Welcome back</h3>
+      <h4 className="text-2xl text-center font-semibold">Please Login</h4>
       <form onSubmit={handleSubmit(handleLogin)} className="card-body">
         <fieldset className="fieldset">
           {/* email field */}
-          <label className="label">Email</label>
+          <label className="label ml-2">Email</label>
           <input
             type="email"
             {...register("email", { required: true })}
-            className="input"
+            className="input mx-auto"
             placeholder="Email"
           />
           {errors.email?.type === "required" && (
             <p className="text-red-500">Email is required</p>
           )}
           {/* password field */}
-          <label className="label">Password</label>
+          <label className="label ml-2">Password</label>
           <input
             type={show ? "text" : "password"}
             {...register("password", { required: true })}
-            className="input"
+            className="input mx-auto"
             placeholder="Password"
           />
           <span
             onClick={() => setShow(!show)}
-            className="absolute right-[50px] top-[135px] cursor-pointer z-50"
+            className="absolute right-[50px] top-[240px] cursor-pointer z-50"
           >
             {show ? <FaEye /> : <IoEyeOff />}
           </span>
@@ -54,10 +57,16 @@ const Login = () => {
             </p>
           )}
           <div>
-            <a className="link link-hover">Forgot password?</a>
+            <a className="link link-hover ml-2">Forgot password?</a>
           </div>
-          <button className="btn btn-neutral mt-4">Login</button>
+          <button className="btn btn-neutral mt-4 mx-2">Login</button>
         </fieldset>
+        <p className="text-md text-end mx-2">
+          New to zapShift?{" "}
+          <Link to="/register">
+            <span className="text-blue-500 underline">Register</span>
+          </Link>
+        </p>
       </form>
     </div>
   );
