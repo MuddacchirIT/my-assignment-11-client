@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 const Login = () => {
   const {
     register,
@@ -47,7 +48,7 @@ const Login = () => {
           />
           <span
             onClick={() => setShow(!show)}
-            className="absolute right-[50px] top-[240px] cursor-pointer z-50"
+            className="absolute right-[50px] top-[236px] cursor-pointer z-50"
           >
             {show ? <FaEye /> : <IoEyeOff />}
           </span>
@@ -61,6 +62,7 @@ const Login = () => {
           </div>
           <button className="btn btn-neutral mt-4 mx-2">Login</button>
         </fieldset>
+        <SocialLogin></SocialLogin>
         <p className="text-md text-end mx-2">
           New to zapShift?{" "}
           <Link to="/register">

@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 const Register = () => {
   const { show, setShow, registerUser } = useAuth();
   const {
@@ -11,7 +12,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const handleRegistration = (data) => {
-    console.log("after register", data);
+    console.log("after register", data.photo[0]);
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
@@ -27,6 +28,30 @@ const Register = () => {
       <h4 className="text-2xl text-center font-semibold">Registration</h4>
       <form onSubmit={handleSubmit(handleRegistration)} className="card-body">
         <fieldset className="fieldset">
+          {/* name field */}
+          <label className="label ml-2">Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input mx-auto"
+            placeholder="Your Name"
+          />
+          {errors.name?.type === "required" && (
+            <p className="text-red-500">Name is required.</p>
+          )}
+          {/* photo or image field */}
+          <label className="label ml-2">Photo</label>
+
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="file-input mx-auto"
+            placeholder="Your Photo"
+          />
+          {errors.photo?.type === "required" && (
+            <p className="text-red-500">Photo is required.</p>
+          )}
+          {/* email field */}
           <label className="label ml-2">Email</label>
           <input
             type="email"
@@ -52,7 +77,7 @@ const Register = () => {
           />
           <span
             onClick={() => setShow(!show)}
-            className="absolute right-[50px] top-[240px] cursor-pointer z-50"
+            className="absolute right-[50px] top-[239px] cursor-pointer z-50"
           >
             {show ? <FaEye /> : <IoEyeOff />}
           </span>
@@ -75,6 +100,7 @@ const Register = () => {
           </div>
           <button className="btn btn-neutral mt-4 mx-2">Register</button>
         </fieldset>
+        <SocialLogin></SocialLogin>
         <p className="text-md text-end mx-2">
           Already have an account?{" "}
           <Link to="/login">
