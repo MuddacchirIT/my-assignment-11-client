@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 const Login = () => {
   const {
@@ -6,7 +8,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signInUser } = useAuth;
+  const { show, setShow, signInUser } = useAuth;
   const handleLogin = (data) => {
     console.log("form data", data);
     signInUser(data.email, data.password)
@@ -35,11 +37,17 @@ const Login = () => {
           {/* password field */}
           <label className="label">Password</label>
           <input
-            type="password"
+            type={show ? "text" : "password"}
             {...register("password", { required: true })}
             className="input"
             placeholder="Password"
           />
+          <span
+            onClick={() => setShow(!show)}
+            className="absolute right-[50px] top-[135px] cursor-pointer z-50"
+          >
+            {show ? <FaEye /> : <IoEyeOff />}
+          </span>
           {errors.password?.type === "required" && (
             <p className="text-red-500">
               Password must be 6 characters of longer.

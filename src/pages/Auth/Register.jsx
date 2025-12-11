@@ -21,8 +21,8 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleRegistration)}>
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <form onSubmit={handleSubmit(handleRegistration)} className="card-body">
         <fieldset className="fieldset">
           <label className="label">Email</label>
           <input
@@ -49,7 +49,7 @@ const Register = () => {
           />
           <span
             onClick={() => setShow(!show)}
-            className="absolute right-[1210px] top-[253px] cursor-pointer z-50"
+            className="absolute right-[50px] top-[135px] cursor-pointer z-50"
           >
             {show ? <FaEye /> : <IoEyeOff />}
           </span>
