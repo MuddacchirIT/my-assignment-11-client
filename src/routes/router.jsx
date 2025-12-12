@@ -6,10 +6,12 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Coverage from "../pages/Coverage";
 import Home from "../pages/Home";
+import Rider from "../pages/Rider";
 import Mission from "../pages/subRouter/Mission";
 import Story from "../pages/subRouter/Story";
 import Success from "../pages/subRouter/Success";
 import TeamOthers from "../pages/subRouter/TeamOthers";
+import PrivateRoute from "./PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +20,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "rider",
+        element: (
+          <PrivateRoute>
+            <Rider></Rider>
+          </PrivateRoute>
+        ),
       },
       {
         path: "about-us",

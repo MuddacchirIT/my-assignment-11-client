@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 const Login = () => {
@@ -11,11 +11,15 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const { show, setShow, signInUser } = useAuth;
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("in the login page", location);
   const handleLogin = (data) => {
     console.log("form data", data);
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        navigate(location.state);
       })
       .catch((error) => {
         console.log(error);
