@@ -1,13 +1,18 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import { MoonLoader } from "react-spinners";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, loading, logOut } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("in the logout", location);
   const handleLogOut = () => {
     logOut()
       .then()
       .catch((error) => {
         console.log(error);
+        navigate(location?.state || "/");
       });
   };
   const links = (
@@ -20,6 +25,9 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to="coverage">Coverage</NavLink>
+      </li>
+      <li>
+        <NavLink to="sendParcel">Send Parcel</NavLink>
       </li>
     </>
   );
@@ -43,7 +51,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {user ? (
+        {loading ? (
+          <MoonLoader />
+        ) : user ? (
           <a onClick={handleLogOut} className="btn">
             Log Out
           </a>

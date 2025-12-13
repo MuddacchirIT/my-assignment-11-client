@@ -19,7 +19,7 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        navigate(location.state);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +69,7 @@ const Login = () => {
         <SocialLogin></SocialLogin>
         <p className="text-md text-end mx-2">
           New to zapShift?{" "}
-          <Link to="/register">
+          <Link state={location.state} to="/register">
             <span className="text-blue-500 underline">Register</span>
           </Link>
         </p>

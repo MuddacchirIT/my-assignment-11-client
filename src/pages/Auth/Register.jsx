@@ -2,7 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 const Register = () => {
@@ -12,6 +12,9 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("in the register", location);
   const handleRegistration = (data) => {
     console.log("after register", data.photo[0]);
     const profileImg = data.photo[0];
@@ -36,6 +39,7 @@ const Register = () => {
           updateUserProfile(userProfile)
             .then(() => {
               console.log("user profile updated done");
+              navigate(location?.state || "/");
             })
             .catch((error) => console.log(error));
         });
@@ -125,7 +129,7 @@ const Register = () => {
         <SocialLogin></SocialLogin>
         <p className="text-md text-end mx-2">
           Already have an account?{" "}
-          <Link to="/login">
+          <Link state={location.state} to="/login">
             <span className="text-blue-500 underline">Login</span>
           </Link>
         </p>

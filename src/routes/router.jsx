@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import SendParcel from "../components/SendParcel";
 import AuthLayout from "../layouts/AuthLayout";
 import RootLayout from "../layouts/RootLayout";
 import AboutUs from "../pages/AboutUs";
@@ -26,6 +27,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Rider></Rider>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "sendParcel",
+        element: (
+          <PrivateRoute>
+            <SendParcel></SendParcel>
           </PrivateRoute>
         ),
       },
