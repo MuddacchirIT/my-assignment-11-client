@@ -1,10 +1,12 @@
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { error },
   } = useForm();
   const serviceCenters = useLoaderData();
@@ -17,7 +19,48 @@ const SendParcel = () => {
     const districts = regionDistricts.map((d) => d.district);
     return districts;
   };
-  const handleSendParcel = (data) => {};
+  const handleSendParcel = (data) => {
+    console.log("after submit", data);
+    const isDocument = data.parcelType === "document";
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    const parcelWeight = parseFloat(data.parcelWeight);
+
+    let cost = 0;
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight < 3) {
+        cost = isSameDistrict ? 110 : 150;
+      } else {
+        const minCharge = isSameDistrict ? 110 : 150;
+        const extraWeight = parcelWeight - 3;
+        const extraCharge = isSameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+
+        cost = minCharge + extraCharge;
+      }
+    }
+    console.log("after cost", cost);
+    Swal.fire({
+      title: "Please pay the Cost!",
+      text: `You will be charged TK. ${cost}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "I agree",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success",
+        // });
+      }
+    });
+    reset();
+  };
   return (
     <div className="max-w-[1500px] mx-auto my-10">
       <h2 className="text-5xl font-bold">Send A Parcel</h2>
@@ -27,7 +70,7 @@ const SendParcel = () => {
           <label className="label mr-4">
             <input
               type="radio"
-              {...register("parcel type")}
+              {...register("parcelType")}
               value="document"
               className="radio"
               defaultChecked
@@ -37,7 +80,7 @@ const SendParcel = () => {
           <label className="label">
             <input
               type="radio"
-              {...register("parcel type")}
+              {...register("parcelType")}
               value="non-document"
               className="radio"
             />
@@ -163,9 +206,9 @@ const SendParcel = () => {
             </fieldset>
             {/* receiver district */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Sender District</legend>
+              <legend className="fieldset-legend">Receiver District</legend>
               <select
-                {...register("senderDistrict")}
+                {...register("receiverDistrict")}
                 defaultValue="Pick a district"
                 className="select"
               >
