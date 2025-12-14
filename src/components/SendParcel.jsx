@@ -65,14 +65,23 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="sender name"
             />
-            {/* sender address */}
-            <label className="label">Sender Address</label>
+            {/* sender email */}
+            <label className="label">Sender Email</label>
             <input
               type="text"
-              {...register("senderAddress")}
+              {...register("senderEmail")}
               className="input w-full"
-              placeholder="sender address"
+              placeholder="sender email"
             />
+            {/* sender region */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Sender Regions</legend>
+              <select defaultValue="Pick a district" className="select">
+                <option disabled={true}>Pick a district</option>
+                <option>Chrome</option>
+              </select>
+              <span className="label">Optional</span>
+            </fieldset>
             {/* sender district */}
             <label className="label">Sender District</label>
             <input
@@ -81,11 +90,19 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="sender district"
             />
+            {/* sender address */}
+            <label className="label">Sender Address</label>
+            <input
+              type="text"
+              {...register("senderAddress")}
+              className="input w-full"
+              placeholder="sender address"
+            />
           </fieldset>
           {/* receiver details */}
           <fieldset className="fieldset">
             <h4 className="text-2xl font-semibold">Receiver Details</h4>
-            {/* sender name */}
+            {/* receiver name */}
             <label className="label">Receiver Name</label>
             <input
               type="text"
@@ -93,21 +110,38 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="reciver name"
             />
-            {/* sender address */}
-            <label className="label">Receiver Address</label>
+            {/* receiver email */}
+            <label className="label">Receiver Email</label>
             <input
               type="text"
-              {...register("receiverAddress")}
+              {...register("receiverEmail")}
               className="input w-full"
-              placeholder="receiver address"
+              placeholder="reciver email"
             />
-            {/* sender district */}
+            {/* receiver region */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Browsers</legend>
+              <select defaultValue="Pick a browser" className="select">
+                <option disabled={true}>Pick a browser</option>
+                <option>Chrome</option>
+              </select>
+              <span className="label">Optional</span>
+            </fieldset>
+            {/* receiver district */}
             <label className="label">Receiver District</label>
             <input
               type="text"
               {...register("receiverDistrict")}
               className="input w-full"
               placeholder="receiver district"
+            />
+            {/* receiver address */}
+            <label className="label">Receiver Address</label>
+            <input
+              type="text"
+              {...register("receiverAddress")}
+              className="input w-full"
+              placeholder="receiver address"
             />
           </fieldset>
         </div>
