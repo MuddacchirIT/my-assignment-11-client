@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import SendParcel from "../components/SendParcel";
 import AuthLayout from "../layouts/AuthLayout";
+import Dashboard from "../layouts/DashboardLayout";
 import RootLayout from "../layouts/RootLayout";
 import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Coverage from "../pages/Coverage";
+import MyParcels from "../pages/Dashboard/MyParcels";
 import Home from "../pages/Home";
 import Rider from "../pages/Rider";
 import Mission from "../pages/subRouter/Mission";
@@ -78,6 +80,20 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "my-parcels",
+        Component: MyParcels,
       },
     ],
   },
