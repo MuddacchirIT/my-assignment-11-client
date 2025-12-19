@@ -8,6 +8,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Coverage from "../pages/Coverage";
 import MyParcels from "../pages/Dashboard/MyParcels";
+import Payment from "../pages/Dashboard/Payment";
 import Home from "../pages/Home";
 import Rider from "../pages/Rider";
 import Mission from "../pages/subRouter/Mission";
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: "my-parcels",
         Component: MyParcels,
+      },
+      {
+        path: "payment/:parcelId",
+        Component: Payment,
       },
     ],
   },

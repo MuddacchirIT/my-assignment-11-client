@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-  const updateUserProfile = () => {
+  const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
   const logOut = () => {

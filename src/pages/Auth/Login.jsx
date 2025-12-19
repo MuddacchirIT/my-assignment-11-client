@@ -10,10 +10,11 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { show, setShow, signInUser } = useAuth;
+  const { show, setShow, signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   console.log("in the login page", location);
+
   const handleLogin = (data) => {
     console.log("form data", data);
     signInUser(data.email, data.password)

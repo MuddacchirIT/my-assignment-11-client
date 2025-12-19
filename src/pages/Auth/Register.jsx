@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 const Register = () => {
-  const { show, setShow, registerUser, updateUserProfile } = useAuth();
+  const { show, setShow, registerUser, updateUserProfile, logOut } = useAuth();
   const {
     register,
     handleSubmit,
@@ -38,8 +38,10 @@ const Register = () => {
           };
           updateUserProfile(userProfile)
             .then(() => {
-              console.log("user profile updated done");
-              navigate(location?.state || "/");
+              logOut().then(() => {
+                console.log("user profile updated done");
+                navigate("/login");
+              });
             })
             .catch((error) => console.log(error));
         });
