@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 const Login = () => {
@@ -17,12 +18,27 @@ const Login = () => {
 
   const handleLogin = (data) => {
     console.log("form data", data);
+
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
         navigate(location?.state || "/");
+        toast.success("Logged In successfully", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        });
       })
       .catch((error) => {
+        toast.error("You are not registered!", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "dark",
+        });
         console.log(error);
       });
   };
@@ -71,7 +87,7 @@ const Login = () => {
         <p className="text-md text-end mx-2">
           New to zapShift?{" "}
           <Link state={location.state} to="/register">
-            <span className="text-blue-500 underline">Register</span>
+            <span className="text-blue-500 mr-1 underline">Register</span>
           </Link>
         </p>
       </form>

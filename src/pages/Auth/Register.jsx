@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 const Register = () => {
@@ -41,12 +42,30 @@ const Register = () => {
               logOut().then(() => {
                 console.log("user profile updated done");
                 navigate("/login");
+                toast.success("signup successful", {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  theme: "colored",
+                });
               });
             })
             .catch((error) => console.log(error));
         });
       })
       .catch((error) => {
+        toast.error("You are already registered", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        });
         console.log(error);
       });
   };

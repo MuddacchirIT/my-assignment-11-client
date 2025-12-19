@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
-import { MoonLoader } from "react-spinners";
+import Loader from "../components/Loader";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 const Navbar = () => {
@@ -59,7 +59,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {loading ? (
-          <MoonLoader />
+          <Loader></Loader>
         ) : user ? (
           <a onClick={handleLogOut} className="btn">
             Log Out
